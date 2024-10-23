@@ -1,0 +1,15 @@
+{
+  "name": "automationpractice.pl",
+  "version": "1.0.0",
+  "description": "automationpractice website automation testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ilona Małocha",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.14.2",
+    "cypress-file-upload": "^5.0.8"
+  }
+}
