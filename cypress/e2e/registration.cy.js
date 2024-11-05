@@ -42,6 +42,10 @@ describe('User Registration', () => {
                 );
                 RegistrationPage.submitRegistration();
                 RegistrationPage.assertSuccessMessage(dataToSubmit.message);
+                cy.writeFile('cypress/fixtures/tempLoginData.json', {
+                    email: dataToSubmit.email,
+                    password: dataToSubmit.password
+                });
                 RegistrationPage.signOut();
             });
         });

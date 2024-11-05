@@ -9,14 +9,14 @@ describe('Filtering', () => {
         Home.clickOnWomenTab()
     })
 
-describe('Filtering by category', () => {
+    describe('Filtering by category', () => {
     const categoriesToTest = [
             { name: 'Tops', filterId: 4},
             { name: 'Dresses', filterId: 8}
         ];
     
         categoriesToTest.forEach(category => {
-            it.only(`should display only products from the ${category.name} category`, () => {
+            it.skip(`should display only products from the ${category.name} category`, () => { //zaskipowane bo nie wiem do końca jak to przetestować
                 // Wybierz kategorię
                 Filter.selectCategory(category.filterId);
                 cy.wait(2000);

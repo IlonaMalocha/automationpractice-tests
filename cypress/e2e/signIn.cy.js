@@ -1,50 +1,66 @@
 ///<reference types="cypress"/>
-import Home from "../support/page_objects/Home"
 
-//Creating an account
-//-heading verification
-//-no e-mail
-//-incorrect e-mail
-//-correct e-mail
+import Home from "../support/page_objects/Home.js";
+import SignInPage from "../support/page_objects/SignInPage.js";
+import loginData from '../fixtures/loginData.json';
 
-//Loging
-//-heading verification
-//-
+describe('User Login', () => {
 
-describe('Formularz kontaktowy - pełne wypełnienie', () => {
-    it('Powinno wysłać formularz poprawnie po wypełnieniu wszystkich pól', () => {
-        beforeEach('Go to Contact Us subpage', () => {
-            cy.openHomePage()
-            Home.clickOnContactUs()
-      // Odwiedzenie strony z formularzem
-      cy.visit('http://www.automationpractice.pl/index.php?controller=contact')
-  
-      // Wypełnienie wszystkich wymaganych pól
-      cy.get('#id_contact').select('Customer service')  // wybór tematu
-      cy.get('#email').type('jan.kowalski@example.com') // wpisanie emaila
-      cy.get('#id_order').type('123456')                // wpisanie ID zamówienia
-      cy.get('#message').type('Proszę o kontakt.')      // wpisanie wiadomości
-  
-      // Wysłanie formularza
-      cy.get('#submitMessage').click()
-  
-      // Sprawdzenie, czy formularz został wysłany i pojawił się komunikat potwierdzenia
-      cy.get('.alert-success').should('contain', 'Your message has been successfully sent to our team.')
-    })
-  })
+    beforeEach('Go to SignIn page', () => {
+        cy.openHomePage();
+        Home.clickOnSingIn(); // Przejście na stronę logowania
+    });
 
-  describe('Formularz kontaktowy - tylko obowiązkowe pola', () => {
-    it('Powinno wysłać formularz poprawnie po wypełnieniu tylko wymaganych pól', () => {
-      cy.visit('http://www.automationpractice.pl/index.php?controller=contact')
-  
-      cy.get('#id_contact').select('Customer service')  // wybór tematu
-      cy.get('#email').type('jan.kowalski@example.com') // wpisanie emaila
-      cy.get('#message').type('Proszę o kontakt.')      // wpisanie wiadomości
-  
-      cy.get('#submitMessage').click()
-  
-      cy.get('.alert-success').should('contain', 'Your message has been successfully sent to our team.')
-    })
-  })
-})
-  
+    beforeEach(function() {
+        cy.fixture('loginData').then((data) => {
+            this.loginData = data;
+        });
+    });
+
+    describe('Positive test cases', () => {
+
+      it('Should log in with valid credentials from registration', () => {
+        // Wczytanie e-maila i hasła z pliku `tempLoginData.json`
+        cy.fixture('tempLoginData').then((loginData) => {
+            SignInPage.enterEmail(loginData.email);
+            SignInPage.enterPassword(loginData.password);
+            SignInPage.submitLogin();
+            SignInPage.assertSuccessMessage("Welcome to your account. Here you can manage all of your personal information and orders.");
+            SignInPage.clickOnSignOut();
+        });
+    });
+    });
+
+    describe('Negative test cases', () => {
+
+        it('Should show an error with an invalid email format', function() {
+            const invalidData = this.loginData.find(test => test.scenario === 'Invalid email format');
+            SignInPage.enterEmail(invalidData.email);
+            SignInPage.enterPassword(invalidData.password);
+            SignInPage.submitLogin();
+            SignInPage.assertErrorMessage(invalidData.message); // Sprawdzenie komunikatu błędu
+        });
+
+        it('Should show an error when email is missing', function() {
+            const invalidData = this.loginData.find(test => test.scenario === 'Missing email');
+            SignInPage.enterPassword(invalidData.password);
+            SignInPage.submitLogin();
+            SignInPage.assertErrorMessage(invalidData.message);
+        });
+
+        it('Should show an error when password is missing', function() {
+            const invalidData = this.loginData.find(test => test.scenario === 'Missing password');
+            SignInPage.enterEmail(invalidData.email);
+            SignInPage.submitLogin();
+            SignInPage.assertErrorMessage(invalidData.message);
+        });
+
+        it('Should show an error with incorrect email or password', function() {
+            const invalidData = this.loginData.find(test => test.scenario === 'Incorrect email or password');
+            SignInPage.enterEmail(invalidData.email);
+            SignInPage.enterPassword(invalidData.password);
+            SignInPage.submitLogin();
+            SignInPage.assertErrorMessage(invalidData.message);
+        });
+    });
+});

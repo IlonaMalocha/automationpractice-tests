@@ -9,4 +9,4 @@ cypress/screenshots/
 cypress/videos/
 
 #node modules
-cypress/node_modules/
+node_modules/
