@@ -1,4 +1,4 @@
-class Home {
+class Home { //tutaj wersja z getterami, można też zrobić wersję z metodami (ta druga Zazwyczaj stosowana, gdy metoda wykonuje więcej niż tylko cy.get() — czyli jakieś działanie lub sekwencję kroków (jak kliknięcia, warunki, helpery).)
     get womenTab() {
         return cy.get('#block_top_menu .sf-menu > li > a[title="Women"]')
     }
@@ -11,75 +11,36 @@ class Home {
     get blogTab(){
         return cy.get('#block_top_menu .sf-menu > li > a[title="Blog"]')
     }
-    get topsCategory(){
-        return cy.get('[class="sfHover"]').contains('Tops')
-    }
-    get dressesCategory(){
-        return cy.get('[class="sfHover"]').contains('Dresses')
-    }
-    get tShirtsCategory(){
-        return cy.get('[class="sfHover"]').contains('T-shirts')
-    }
-    get blousesCategory(){
-        return cy.get('[class="sfHover"]').contains('Blouses')
-    }
-    get casualCategory(){
-        return cy.get('[class="sfHover"]').contains('Casual')
-    }
-    get eveningCategory(){
-        return cy.get('[class="sfHover"]').contains('Evening')
-    }
-    get summerCategory(){
-        return cy.get('[class="sfHover"]').contains('Summer')
-    }
     get contactUs(){
         return cy.get('a[title="Contact us"]')
     }
-    clickOnWomenTab(){
-        this.womenTab.click();
+    get signIn(){
+        return cy.get('a.login')
     }
-    clickOnDressesTab(){
-        this.dressesTab.click()
+    get aboutUs(){
+        return cy.get('a[title="About us"]')
     }
-    clickOnTshirtsTab(){
-        this.tShirtsTab.click()
+    get termsAndConditions(){
+        return cy.get('a[title="Terms and conditions of use"]')
     }
-    clickOnBlogTab(){
-        this.blogTab.click();
+    get ourStores(){
+        return cy.get('a[title="Our stores"]')
     }
-    mouseoverWomenTab(){
+    get myAccount(){
+        return cy.get('a[title="Manage my customer account"]');
+    }
+    getCategory(name) { //metoda do klikania na kategorie, konkretną kategorię wpisujemy w teście - DRY (Don't Repeat Yourself)
+        return cy.get('.sfHover').contains(name)
+    }
+    mouseoverWomenTab(){ //zostawiłam tylko takie metody a zrezygnowałam z ClickOn..., za dużo tego było
         this.womenTab.trigger('mouseover').trigger('mousemove');
-    }
-    clickOnTopsCategory(){
-        this.topsCategory.click()
-    }
-    clickOnDressesCategory(){
-        this.dressesCategory.click()
-    }
-    clickOnTshirtsCategory(){
-        this.tShirtsCategory.click()
-    }
-    clickOnBlousesCategory(){
-        this.blousesCategory.click()
-    }
-    clickOnCasualCategory(){
-        this.casualCategory.click()
-    }
-    clickOnEveningCategory(){
-        this.eveningCategory.click()
-    }
-    clickOnSummerCategory(){
-        this.summerCategory.click()
     }
     mouseoverDressesTab(){
         this.dressesTab.trigger('mouseover').trigger('mousemove');
-    }
-    clickOnContactUs(){
-        this.contactUs.click();
-    }
-    clickOnSingIn(){
-        return cy.get('[class="login"]').contains('Sign in').click()
-    }
+    } //Cypress z założenia nie symuluje faktycznego ruchu myszką (jak robią to np. Selenium/WebDriver). Kiedy używasz metody .click() lub .invoke('show'), to menu może się nie pokazać, bo nie został wywołany odpowiedni event.
+    //To wymusza dokładnie te eventy, których potrzebuje frontend, żeby pokazać rozwijane menu — najczęściej:
+    //mouseover inicjuje logikę "pokaż submenu"
+    //mousemove potwierdza, że "użytkownik faktycznie tam jest kursorem"
 }
 
-export default new Home();
+export default new Home(); //Eksportowanie jako singleton (export default new Home()), więc użycie w testach będzie proste i czyste.

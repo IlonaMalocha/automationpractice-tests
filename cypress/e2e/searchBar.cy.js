@@ -1,3 +1,5 @@
+//narazie to sobie darujemy
+
 ///<reference types="cypress"/>
 
 import Search from "../support/page_objects/Search.js";

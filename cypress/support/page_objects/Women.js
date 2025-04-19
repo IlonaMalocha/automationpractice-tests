@@ -1,3 +1,5 @@
+//POM do womenSubPage czego póki co nie publikuję w portfolio
+
 class Women {
     get sortBy() {
         return cy.get('#selectProductSort')

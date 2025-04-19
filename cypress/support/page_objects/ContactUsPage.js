@@ -68,6 +68,13 @@ class ContactUsPage {
         this.SubmitButton.click();
     }
 
+    fillForm({ subject, email, orderId, message }) {
+        if (subject) this.selectSubjectHeading(subject);
+        if (email) this.typeEmail(email);
+        if (orderId) this.typeOrderId(orderId);
+        if (message) this.typeMessage(message);
+    }
+
     assertSuccessMessage(expectedMessage) {
         this.SuccessAlert.should('contain', expectedMessage);
     }

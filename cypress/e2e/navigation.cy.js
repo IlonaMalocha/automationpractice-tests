@@ -1,102 +1,132 @@
 ///<reference types="cypress"/>
 
-import {login, passwd} from "../fixtures/loginData.json"
 import Home from "../support/page_objects/Home.js"
 
-describe('Verify navigation across Top Menu', () => {
+describe('Navigation tests', () => {
   beforeEach('Open Website', () => {
-    cy.openHomePage()
-  })
+    cy.openHomePage();
+  });
 
-  it("CLick on Women Tab", () => {
-    Home.clickOnWomenTab();
-    cy.url().should('include', 'id_category=3&controller=category')
-  })
-    
-  it('Click on Dresses Tab', () => {
-    Home.clickOnDressesTab();
-    cy.url().should('include', 'id_category=8&controller=category')
+  describe('Header navigation', () => {
+    it('Should navigate to Contact Us page', () => {
+      Home.contactUs.click();
+      cy.url().should('include', 'controller=contact');
+    });
+
+    it('Should navigate to Sign In page', () => {
+      Home.signIn.click();
+      cy.url().should('include', 'controller=authentication');
+    });
+  });
+
+  describe('Top menu navigation', () => {
+
+    it('Should redirect to Women category after clicking the menu item', () => {
+      Home.womenTab.click();
+      cy.url().should('include', 'id_category=3')
+    })
+      
+    it('Should redirect to Dresses category after clicking the menu item', () => {
+      Home.dressesTab.click();
+      cy.url().should('include', 'id_category=8')
+      })
+
+    it('Should redirect to T-shirts category after clicking the menu item', () => {
+      Home.tShirtsTab.click();
+      cy.url().should('include', 'id_category=5')
     })
 
-  it('Click on T-shirts Tab', () => {
-    Home.clickOnTshirtsTab();
-    cy.url().should('include', 'id_category=5&controller=category')
+    it('Should have correct Blog link in the menu', () => {
+      Home.blogTab
+        .should('have.attr', 'href')
+        .and('include', 'prestashop.com/blog');
+    }); //cypress działa na jednej karcie przeglądarki, można tutaj zastosować sprawdzenie, czy link ma poprawny href (najczęściej używana), skoro nie możesz "wejść" na nową stronę, przetestuj, czy link wskazuje właściwy adres.
   })
 
-  it('Click on Blog Tab', () => {
-    Home.clickOnBlogTab();
-    //cy.url().should('include', 'prestashop.com/blog') - przekierowanie na inną stronę - jak to powinno się testować
-  })
-})
+  describe('Women dropdown menu navigation', () => {
 
-describe('Verify navigation across Women Tab', () => {
-  beforeEach('Open Website', () => {
-    cy.openHomePage()
-  })
+    it('Should redirect to Tops category after clicking the dropdown menu item', () => {
+      Home.mouseoverWomenTab();
+      Home.getCategory('Tops').click()
+      cy.url().should('include', 'id_category=4')
+    })
 
-  it('Click on Tops Category', () => {
-    Home.mouseoverWomenTab();
-    Home.clickOnTopsCategory();
-    cy.url().should('include', 'id_category=4&controller=category')
-  })
+    it('Should redirect to Dresses category after clicking the dropdown menu item', () => {
+      Home.mouseoverWomenTab();
+      Home.getCategory('Dresses').click()
+      cy.url().should('include', 'id_category=8')
+    })
 
-  it('CLick on Dresses Category', () => {
-    Home.mouseoverWomenTab();
-    Home.clickOnDressesCategory();
-    cy.url().should('include', 'id_category=8&controller=category')
-  })
+    it('Should redirect to T-shirts category after clicking the dropdown menu item', () => {
+      Home.mouseoverWomenTab();
+      Home.getCategory('T-shirts').click()
+      cy.url().should('include', 'id_category=5')
+    })
 
-  it('Click on T-shirts Category', () => {
-    Home.mouseoverWomenTab();
-    Home.clickOnTshirtsCategory();
-    cy.url().should('include', 'id_category=5&controller=category')
-  })
+    it('Should redirect to Blouses category after clicking the dropdown menu item', () => {
+      Home.mouseoverWomenTab();
+      Home.getCategory('Blouses').click()
+      cy.url().should('include', 'id_category=7')
+    })
 
-  it('CLick on Blouses Category', () => {
-    Home.mouseoverWomenTab();
-    Home.clickOnBlousesCategory();
-    cy.url().should('include', 'id_category=7&controller=category')
-  })
+    it('Should redirect to Casual Dresses category after clicking the dropdown menu item', () => {
+      Home.mouseoverWomenTab();
+      Home.getCategory('Casual').click()
+      cy.url().should('include', 'id_category=9')
+    })
 
-  it('Click on Casual Dresses Category', () => {
-    Home.mouseoverWomenTab();
-    Home.clickOnCasualCategory();
-    cy.url().should('include', 'id_category=9&controller=category')
-  })
+    it('Should redirect to Evening Dresses category after clicking the dropdown menu item', () => {
+      Home.mouseoverWomenTab();
+      Home.getCategory('Evening').click()
+      cy.url().should('include', 'id_category=10')
+    })
 
-  it('Click on Evening Dresses Category', () => {
-    Home.mouseoverWomenTab();
-    Home.clickOnEveningCategory();
-    cy.url().should('include', 'id_category=10&controller=category')
+    it('Should redirect to Summer Dresses category after clicking the dropdown menu item', () => {
+      Home.mouseoverWomenTab();
+      Home.getCategory('Summer').click()
+      cy.url().should('include', 'id_category=11')
+    })
   })
 
-  it('Click on Summer Dresses Category', () => {
-    Home.mouseoverWomenTab();
-    Home.clickOnSummerCategory();
-    cy.url().should('include', 'id_category=11&controller=category')
-  })
-})
+  describe('Dresses dropdown menu navigation', () => {
 
-describe('Verify navigation across Dresses Tab', () => {
-  beforeEach('Open Website', () => {
-    cy.openHomePage()
-  })
+    it('Should redirect to Casual Dresses category after clicking the dropdown menu item', () => {
+      Home.mouseoverDressesTab();
+      Home.getCategory('Casual').click()
+      cy.url().should('include', 'id_category=9')
+    })
 
-  it('Click on Casual Dresses Category', () => {
-    Home.mouseoverDressesTab();
-    Home.clickOnCasualCategory();
-    cy.url().should('include', 'id_category=9&controller=category')
-  })
+    it('Should redirect to Evening Dresses category after clicking the dropdown menu item', () => {
+      Home.mouseoverDressesTab();
+      Home.getCategory('Evening').click()
+      cy.url().should('include', 'id_category=10')
+    })
 
-  it('Click on Evening Dresses Category', () => {
-    Home.mouseoverDressesTab();
-    Home.clickOnEveningCategory();
-    cy.url().should('include', 'id_category=10&controller=category')
+    it('Should redirect to Summer Dresses category after clicking the dropdown menu item', () => {
+      Home.mouseoverDressesTab();
+      Home.getCategory('Summer').click()
+      cy.url().should('include', 'id_category=11')
+    })
   })
 
-  it('Click on Summer Dresses Category', () => {
-    Home.mouseoverDressesTab();
-    Home.clickOnSummerCategory();
-    cy.url().should('include', 'id_category=11&controller=category')
+  describe('Footer navigation', () => {
+    it.skip('Should navigate to About Us page', () => {
+      Home.aboutUs.click();
+      cy.url().should('include', 'about-us');
+    }); //przekierowuje na stronę której nie ma (ale jakby była to wyobrażam sobie że tak by wyglądała)
+
+    it.skip('Should navigate to Terms and Conditions page', () => {
+      Home.termsAndConditions.click();
+      cy.url().should('include', 'terms-and-conditions');
+    }); //przekierowuje na stronę której nie ma
+
+    it('Should navigate to Our Stores page', () => {
+      Home.ourStores.click();
+      cy.url().should('include', 'stores');
+    })
+    it('Should navigate to Authentication page', () => {
+      Home.myAccount.click();
+      cy.url().should('include', 'authentication');
+    })
   })
 })

@@ -1,3 +1,5 @@
+//narazie do portfolio nie wklejamy
+
 import { searchPhrase } from "../../fixtures/searchData.json"
 
 class Search {

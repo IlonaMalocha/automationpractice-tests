@@ -1,7 +1,6 @@
 [
     {
         "scenario": "Valid email, all fields completed",
-        "email": "{{email}}",
         "title": "Mr",
         "firstName": "John",
         "lastName": "Doe",
@@ -16,32 +15,27 @@
     },
     {
         "scenario": "Valid email, mandatory fields completed",
-        "email": "{{email}}",
         "title": "",
         "firstName": "Keira",
         "lastName": "Black",
         "password": "Password123",
-        "dob": {
-            "day": "-",
-            "month": "-",
-            "year": "-"
-        },
+        "dob": {},
         "newsletter": false,
         "message": "Your account has been created."
     },
     {
         "scenario": "Invalid email format",
         "email": "invalid_email",
-        "message":"Invalid email address."
+        "message": "Invalid email address."
     },
     {
         "scenario": "Invalid email format",
         "email": "i234234234",
-        "message":"Invalid email address."
+        "message": "Invalid email address."
     },
     {
         "scenario": "Empty first name",
-        "email": "empty_first@gmail.com",
+        "email": "test3435_email@gmail.com",
         "title": "Mrs",
         "firstName": "",
         "lastName": "Doe",
@@ -52,12 +46,12 @@
             "year": "1992"
         },
         "newsletter": true,
-        "message":"firstname is required."
+        "message": "firstname is required."
     },
     {
         "scenario": "Empty last name",
-        "email": "valid_email3@test.com",
-        "title": "Ms",
+        "email": "test5635_email@gmail.com",
+        "title": "Mrs",
         "firstName": "Jane",
         "lastName": "",
         "password": "Password123",
@@ -67,11 +61,11 @@
             "year": "1988"
         },
         "newsletter": false,
-        "message":"lastname is required."
+        "message": "lastname is required."
     },
     {
         "scenario": "Password too short",
-        "email": "valid_email44@test.com",
+        "email": "test3900_email@gmail.com",
         "title": "Mr",
         "firstName": "Mark",
         "lastName": "Smith",
@@ -82,11 +76,11 @@
             "year": "1975"
         },
         "newsletter": false,
-        "message":"passwd is invalid."
+        "message": "passwd is invalid."
     },
     {
         "scenario": "Missing password",
-        "email": "valid_email5@test.com",
+        "email": "test1435_email@gmail.com",
         "title": "Mrs",
         "firstName": "Emily",
         "lastName": "Brown",
@@ -97,12 +91,12 @@
             "year": "1995"
         },
         "newsletter": true,
-        "message":"passwd is required."
+        "message": "passwd is required."
     },
     {
         "scenario": "DOB day out of range",
-        "email": "valid_email6@test.com",
-        "title": "Ms",
+        "email": "test4444_email@gmail.com",
+        "title": "Mrs",
         "firstName": "Sara",
         "lastName": "Taylor",
         "password": "Password123",
@@ -112,11 +106,11 @@
             "year": "1980"
         },
         "newsletter": true,
-        "message":"Invalid date of birth."
+        "message": "Invalid date of birth."
     },
     {
         "scenario": "DOB later that today",
-        "email": "valid_email8@test.com",
+        "email": "test312125_email@gmail.com",
         "title": "Mrs",
         "firstName": "Alice",
         "lastName": "Williams",
@@ -124,9 +118,9 @@
         "dob": {
             "day": "29",
             "month": "11",
-            "year": "2024"
+            "year": "2025"
         },
         "newsletter": true,
-        "message":"Invalid date of birth."
+        "message": "Invalid date of birth."
     }
 ]

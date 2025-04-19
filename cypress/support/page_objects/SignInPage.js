@@ -38,16 +38,12 @@ class SignInPage {
 
     // Assercja sukcesu logowania
     assertSuccessMessage(message) {
-        this.successMessage.should('contain.text', message);
+        this.successMessage.should('be.visible').and('contain.text', message); //should('be.visible'), by uniknąć testu przechodzącego, gdy element nie jest w ogóle wyrenderowany
     }
 
     // Assercja komunikatu błędu logowania
     assertErrorMessage(expectedMessage) {
         this.errorMessage.should('be.visible').and('contain.text', expectedMessage);
-    }
-
-    clickOnSignOut(){
-        cy.get('.logout').click();
     }
 }
 

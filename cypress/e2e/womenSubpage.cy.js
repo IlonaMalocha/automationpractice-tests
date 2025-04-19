@@ -1,4 +1,19 @@
-///<reference types="cypress"/>
+// SORTOWANIE Z TEGO PLIKU ZOSTAŁO PRZENIESIONE DO OSOBNEGO PLIKU Z TESTEM -SORTING-. PODSTRONĘ MOŻNA PRZETESTOWAĆ DODATKOWO PO OPUBLIKOWANIU REPOZYTORIUM. Można zrobić coś jak poniżej:
+// cypress/
+//   └── e2e/
+//       ├── navigation/
+//       │   └── mainNavigation.cy.js     # testy nawigacji z homepage
+//       │
+//       ├── categoryPages/
+//       │   ├── womenPage.cy.js          # testy strony "Women" + sortowanie
+//       │   ├── tShirtsPage.cy.js        # testy strony "T-Shirts" + sortowanie
+//       │   └── dressesPage.cy.js        # testy strony "Dresses" + sortowanie
+//       │
+//       └── common/
+//           └── sortOptions.cy.js        # test sortowania jako wspólny komponent (jeśli masz reużywalny test sortowania)
+
+
+// ///<reference types="cypress"/>
 
 import Home from "../support/page_objects/Home"
 import Women from "../support/page_objects/Women"
@@ -6,7 +21,7 @@ import Women from "../support/page_objects/Women"
 describe('Sorting', () => {
     beforeEach('Go to Women Subpage', () => {
       cy.openHomePage()
-      Home.clickOnWomenTab()
+      Home.womenTab.click()
     })
 
     it('Sorting by Price Asc', () => {

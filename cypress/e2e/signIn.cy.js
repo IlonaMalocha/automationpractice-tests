@@ -2,33 +2,40 @@
 
 import Home from "../support/page_objects/Home.js";
 import SignInPage from "../support/page_objects/SignInPage.js";
-import loginData from '../fixtures/loginData.json';
 
 describe('User Login', () => {
 
-    beforeEach('Go to SignIn page', () => {
-        cy.openHomePage();
-        Home.clickOnSingIn(); // Przejście na stronę logowania
-    });
-
-    beforeEach(function() {
+    beforeEach(function() { // Pobranie danych w jsonie i przejście na stronę logowania
         cy.fixture('loginData').then((data) => {
             this.loginData = data;
         });
+        cy.fixture('tempLoginData').then((data) => {
+            this.tempLoginData = data;
+        });
+        cy.openHomePage();
+        Home.signIn.click();
+    });
+
+    afterEach(() => { //zamiast signOut po każdym przypadku - To sprawdza, czy przycisk Sign out w ogóle istnieje i tylko wtedy go klika — żeby test się nie wywalił, jeśli użytkownik wcale nie był zalogowany.
+        cy.get('body').then(($body) => {
+            if ($body.find('.logout').length > 0) { // lub inny selektor do przycisku wyloguj
+                cy.get('.logout').click();
+            }
+        });
+        cy.clearCookies();
+        cy.clearLocalStorage();
     });
 
     describe('Positive test cases', () => {
 
-      it('Should log in with valid credentials from registration', () => {
+      it('Should log in with valid credentials from registration', function(){
         // Wczytanie e-maila i hasła z pliku `tempLoginData.json`
-        cy.fixture('tempLoginData').then((loginData) => {
-            SignInPage.enterEmail(loginData.email);
-            SignInPage.enterPassword(loginData.password);
+        const { email, password } = this.tempLoginData; //W Cypressie zawsze gdy używasz this.something, upewnij się, że otaczająca funkcja to function () {}, a nie () => {}.
+            SignInPage.enterEmail(email);
+            SignInPage.enterPassword(password);
             SignInPage.submitLogin();
             SignInPage.assertSuccessMessage("Welcome to your account. Here you can manage all of your personal information and orders.");
-            SignInPage.clickOnSignOut();
         });
-    });
     });
 
     describe('Negative test cases', () => {

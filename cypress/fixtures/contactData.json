@@ -1,0 +1,132 @@
+[
+  {
+    "scenario":"Valid email, all fields completed",
+    "subject": "Customer service",
+    "email": "jan.kowalski@example.com",
+    "orderId": "123456",
+    "message": "Proszę o kontakt.",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  },
+  {
+    "scenario":"Valid email, all fields completed",
+    "subject": "Webmaster",
+    "email": "anna.nowak@example.com",
+    "orderId": "7891011",
+    "message": "Zgłaszam problem techniczny z witryną.",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  },
+  {
+    "scenario":"No order reference",
+    "subject": "Customer service",
+    "email": "jan.kowalski@example.com",
+    "orderId": "",
+    "message": "Proszę o kontakt.",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  },
+  {
+    "scenario":"No order reference",
+    "subject": "Webmaster",
+    "email": "jan.kowalski@example.com",
+    "orderId": "",
+    "message": "Proszę o kontakt.",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  },
+  {
+    "scenario":"File attached",
+    "subject": "Customer service",
+    "email": "anna.nowak@example.com",
+    "orderId": "7891011",
+    "message": "Zgłaszam problem techniczny z witryną.",
+    "attachment": "sampleFile.txt",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  },
+  {
+    "scenario":"File attached",
+    "subject": "Webmaster",
+    "email": "anna.nowak@example.com",
+    "orderId": "7891011",
+    "message": "Zgłaszam problem techniczny z witryną. Załączam plik.",
+    "attachment": "sampleFile.txt",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  },
+  {
+    "scenario":"Invalid email",
+    "subject": "Customer service",
+    "email": "test",
+    "orderId": "654321",
+    "message": "Chciałbym uzyskać więcej informacji o moim zamówieniu.",
+    "expectedErrorMessage": "There is 1 error",
+    "expectedErrorMessageReason": "Invalid email address."
+  },
+  {
+    "scenario":"Invalid email",
+    "subject": "Webmaster",
+    "email": "test",
+    "orderId": "654321",
+    "message": "Chciałbym uzyskać więcej informacji o moim zamówieniu.",
+    "expectedErrorMessage": "There is 1 error",
+    "expectedErrorMessageReason": "Invalid email address."
+  },
+  {
+    "scenario":"No email",
+    "subject": "Webmaster",
+    "email": "",
+    "orderId": "654321",
+    "message": "Chciałbym uzyskać więcej informacji o moim zamówieniu.",
+    "expectedErrorMessage": "There is 1 error",
+    "expectedErrorMessageReason": "Invalid email address."
+  },
+  {
+    "scenario":"No email",
+    "subject": "Customer service",
+    "email": "",
+    "orderId": "654321",
+    "message": "Chciałbym uzyskać więcej informacji o moim zamówieniu.",
+    "expectedErrorMessage": "There is 1 error",
+    "expectedErrorMessageReason": "Invalid email address."
+  },
+  {
+    "scenario":"No subject",
+    "subject": "",
+    "correctedSubject": "Customer service",
+    "email": "anna.nowak@example.com",
+    "orderId": "654321",
+    "message": "Chciałbym uzyskać więcej informacji o moim zamówieniu.",
+    "expectedErrorMessage": "There is 1 error",
+    "expectedErrorMessageReason": "Please select a subject from the list provided.",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  },
+  {
+    "scenario":"No subject",
+    "subject": "",
+    "correctedSubject": "Webmaster",
+    "email": "anna.nowak@example.com",
+    "orderId": "654321",
+    "message": "Chciałbym uzyskać więcej informacji o moim zamówieniu.",
+    "expectedErrorMessage": "There is 1 error",
+    "expectedErrorMessageReason": "Please select a subject from the list provided.",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  },
+  {
+    "scenario":"No content",
+    "subject": "Customer service",
+    "email": "anna.nowak@example.com",
+    "orderId": "654321",
+    "message": "",
+    "correctedMessage": "Chciałbym uzyskać więcej informacji o moim zamówieniu.",
+    "expectedErrorMessage": "There is 1 error",
+    "expectedErrorMessageReason": "The message cannot be blank.",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  },
+  {
+    "scenario":"No content",
+    "subject": "Webmaster",
+    "email": "anna.nowak@example.com",
+    "orderId": "654321",
+    "message": "",
+    "correctedMessage": "Chciałbym uzyskać więcej informacji o moim zamówieniu.",
+    "expectedErrorMessage": "There is 1 error",
+    "expectedErrorMessageReason": "The message cannot be blank.",
+    "expectedSuccessMessage": "Your message has been successfully sent to our team."
+  }
+]

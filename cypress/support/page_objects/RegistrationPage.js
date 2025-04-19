@@ -1,53 +1,41 @@
 class RegistrationPage {
 
-    enterEmail(email) {
-        cy.get('#email_create').type(email); // Pole e-mail
-        cy.get('#SubmitCreate').click(); // Kliknięcie przycisku "Create an account"
+    fillEmail(email) {
+        cy.get('#email_create').should('be.visible').type(email); //metoda wpisująca email
     }
 
-    clickOnCreateAnAccount(){
+    submitEmail() {
+        cy.get('#SubmitCreate').click(); //metoda klikająca zatwierdzenie emaila
+    }
+
+    // Kombinacja obu powyższych
+    enterEmail(email) {
+        this.fillEmail(email);
+        this.submitEmail();
+    }
+
+    clickOnCreateAnAccount(){ //kliknięcie przycisku Create an account
         cy.get('#SubmitCreate').click();
     }
 
-    fillPersonalInformation(title, firstName, lastName, password, dob, newsletter) {
-        // Wybór tytułu (jeśli podany)
-        if (title) {
-            if (title === 'Mr') {
-                cy.get('#id_gender1').check();
-            } else if (title === 'Mrs') {
-                cy.get('#id_gender2').check();
-            }
-        }
+    fillPersonalInformation({ title, firstName, lastName, password, dob, newsletter }) {
+        if (title === 'Mr') cy.get('#id_gender1').check(); // Jeśli tytuł to "Mr", zaznacz radio button "Mr"
+        else if (title === 'Mrs') cy.get('#id_gender2').check();  // Jeśli tytuł to "Mrs", zaznacz radio button "Mrs"
     
-        // Imię (jeśli podane)
-        if (firstName) {
-            cy.get('#customer_firstname').type(firstName);
-        }
+        if (firstName) cy.get('#customer_firstname').type(firstName); // Jeśli podano imię, wpisz je do pola "First name"
+        if (lastName) cy.get('#customer_lastname').type(lastName);
+        if (password) cy.get('#passwd').type(password);
     
-        // Nazwisko (jeśli podane)
-        if (lastName) {
-            cy.get('#customer_lastname').type(lastName);
-        }
-    
-        // Hasło (jeśli podane)
-        if (password) {
-            cy.get('#passwd').type(password);
-        }
-    
-        // Data urodzenia (jeśli podana)
         if (dob) {
             if (dob.day) cy.get('#days').select(dob.day);
             if (dob.month) cy.get('#months').select(dob.month);
             if (dob.year) cy.get('#years').select(dob.year);
         }
     
-        // Zgoda na newsletter (jeśli dotyczy)
-        if (newsletter) {
-            cy.get('#newsletter').check();
-        }
+        if (newsletter) cy.get('#newsletter').check();
     }
 
-    submitRegistration() {
+    submitRegistration(){
         cy.get('#submitAccount').click(); // Zatwierdzenie rejestracji
     }
 
@@ -57,10 +45,6 @@ class RegistrationPage {
 
     assertErrorMessage(expectedMessage) {
         cy.get('.alert.alert-danger').should('contain', expectedMessage);
-    }
-
-    signOut(){
-        cy.get('.header_user_info a.logout').click();
     }
 }
 
