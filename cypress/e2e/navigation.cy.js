@@ -40,10 +40,11 @@ describe('Navigation tests', () => {
       Home.blogTab
         .should('have.attr', 'href')
         .and('include', 'prestashop.com/blog');
-    });
+    }); //cypress działa na jednej karcie przeglądarki, można tutaj zastosować sprawdzenie, czy link ma poprawny href (najczęściej używana), skoro nie możesz "wejść" na nową stronę, przetestuj, czy link wskazuje właściwy adres.
   })
 
   describe('Women dropdown menu navigation', () => {
+
     it('Should redirect to Tops category after clicking the dropdown menu item', () => {
       Home.mouseoverWomenTab();
       Home.getCategory('Tops').click()
@@ -88,6 +89,7 @@ describe('Navigation tests', () => {
   })
 
   describe('Dresses dropdown menu navigation', () => {
+
     it('Should redirect to Casual Dresses category after clicking the dropdown menu item', () => {
       Home.mouseoverDressesTab();
       Home.getCategory('Casual').click()
@@ -108,15 +110,17 @@ describe('Navigation tests', () => {
   })
 
   describe('Footer navigation', () => {
-    it.skip('Should navigate to About Us page', () => {
+    //bug below
+    it('[BUG] Should navigate to About Us page', () => {
       Home.aboutUs.click();
       cy.url().should('include', 'about-us');
-    }); //przekierowuje na stronę której nie ma (ale jakby była to wyobrażam sobie że tak by wyglądała)
+    });
 
-    it.skip('Should navigate to Terms and Conditions page', () => {
+    //bug below
+    it('[BUG] Should navigate to Terms and Conditions page', () => {
       Home.termsAndConditions.click();
       cy.url().should('include', 'terms-and-conditions');
-    }); //przekierowuje na stronę której nie ma
+    });
 
     it('Should navigate to Our Stores page', () => {
       Home.ourStores.click();
