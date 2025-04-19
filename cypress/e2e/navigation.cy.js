@@ -20,7 +20,6 @@ describe('Navigation tests', () => {
   });
 
   describe('Top menu navigation', () => {
-
     it('Should redirect to Women category after clicking the menu item', () => {
       Home.womenTab.click();
       cy.url().should('include', 'id_category=3')
@@ -40,11 +39,10 @@ describe('Navigation tests', () => {
       Home.blogTab
         .should('have.attr', 'href')
         .and('include', 'prestashop.com/blog');
-    }); //cypress działa na jednej karcie przeglądarki, można tutaj zastosować sprawdzenie, czy link ma poprawny href (najczęściej używana), skoro nie możesz "wejść" na nową stronę, przetestuj, czy link wskazuje właściwy adres.
+    });
   })
 
   describe('Women dropdown menu navigation', () => {
-
     it('Should redirect to Tops category after clicking the dropdown menu item', () => {
       Home.mouseoverWomenTab();
       Home.getCategory('Tops').click()
@@ -89,7 +87,6 @@ describe('Navigation tests', () => {
   })
 
   describe('Dresses dropdown menu navigation', () => {
-
     it('Should redirect to Casual Dresses category after clicking the dropdown menu item', () => {
       Home.mouseoverDressesTab();
       Home.getCategory('Casual').click()

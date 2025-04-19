@@ -1,5 +1,5 @@
 class ProductDetails {
-    // Elementy
+    
     get sizeDropdown() {
         return cy.get('#group_1');
     }
@@ -20,7 +20,6 @@ class ProductDetails {
         return cy.get('.layer_cart_product h2');
     }
 
-    // Akcje
     selectSize(size) {
         this.sizeDropdown.select(size);
     }
@@ -61,10 +60,10 @@ class ProductDetails {
 
     checkAllSizeColorCombinations() {
         cy.get('#group_1 option').then(($sizes) => {
-            const sizes = Array.from($sizes); // 🔧 Zamieniamy na prawdziwą tablicę
+            const sizes = Array.from($sizes);
     
             cy.get('#color_to_pick_list li a').then(($colors) => {
-                const colors = Array.from($colors); // 🔧 To samo z kolorami
+                const colors = Array.from($colors);
     
                 const iterateCombinations = (sizeIndex, colorIndex) => {
                     if (sizeIndex >= sizes.length) return;
@@ -105,7 +104,7 @@ class ProductDetails {
                         cy.wrap(colors[c]).click();
                         this.checkAvailability().then((availability) => {
                             if (availability === 'In stock') {
-                                return; // koniec
+                                return;
                             } else {
                                 tryNext(s, c + 1);
                             }

@@ -1,4 +1,5 @@
-class Home { //tutaj wersja z getterami, można też zrobić wersję z metodami (ta druga Zazwyczaj stosowana, gdy metoda wykonuje więcej niż tylko cy.get() — czyli jakieś działanie lub sekwencję kroków (jak kliknięcia, warunki, helpery).)
+class Home {
+    
     get womenTab() {
         return cy.get('#block_top_menu .sf-menu > li > a[title="Women"]')
     }
@@ -29,18 +30,15 @@ class Home { //tutaj wersja z getterami, można też zrobić wersję z metodami 
     get myAccount(){
         return cy.get('a[title="Manage my customer account"]');
     }
-    getCategory(name) { //metoda do klikania na kategorie, konkretną kategorię wpisujemy w teście - DRY (Don't Repeat Yourself)
+    getCategory(name) {
         return cy.get('.sfHover').contains(name)
     }
-    mouseoverWomenTab(){ //zostawiłam tylko takie metody a zrezygnowałam z ClickOn..., za dużo tego było
+    mouseoverWomenTab(){
         this.womenTab.trigger('mouseover').trigger('mousemove');
     }
     mouseoverDressesTab(){
         this.dressesTab.trigger('mouseover').trigger('mousemove');
-    } //Cypress z założenia nie symuluje faktycznego ruchu myszką (jak robią to np. Selenium/WebDriver). Kiedy używasz metody .click() lub .invoke('show'), to menu może się nie pokazać, bo nie został wywołany odpowiedni event.
-    //To wymusza dokładnie te eventy, których potrzebuje frontend, żeby pokazać rozwijane menu — najczęściej:
-    //mouseover inicjuje logikę "pokaż submenu"
-    //mousemove potwierdza, że "użytkownik faktycznie tam jest kursorem"
+    }
 }
 
-export default new Home(); //Eksportowanie jako singleton (export default new Home()), więc użycie w testach będzie proste i czyste.
+export default new Home();

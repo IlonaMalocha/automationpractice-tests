@@ -1,47 +1,41 @@
-// SignInPage.js
 class SignInPage {
-    // Selektory pól i przycisków
+    
     get emailInput() {
-        return cy.get('#email'); // Selektor pola e-mail
+        return cy.get('#email');
     }
 
     get passwordInput() {
-        return cy.get('#passwd'); // Selektor pola hasła
+        return cy.get('#passwd');
     }
 
     get signInButton() {
-        return cy.get('#SubmitLogin'); // Selektor przycisku logowania
+        return cy.get('#SubmitLogin');
     }
 
     get errorMessage() {
-        return cy.get('.alert-danger'); // Selektor dla komunikatów o błędach logowania
+        return cy.get('.alert-danger');
     }
 
     get successMessage() {
-        return cy.get('.info-account'); // Selektor dla wiadomości powitalnej po udanym logowaniu
+        return cy.get('.info-account');
     }
 
-    // Metoda wprowadzająca e-mail do pola
     enterEmail(email) {
         this.emailInput.clear().type(email);
     }
 
-    // Metoda wprowadzająca hasło do pola
     enterPassword(password) {
         this.passwordInput.clear().type(password);
     }
 
-    // Metoda do przesyłania formularza logowania
     submitLogin() {
         this.signInButton.click();
     }
 
-    // Assercja sukcesu logowania
     assertSuccessMessage(message) {
-        this.successMessage.should('be.visible').and('contain.text', message); //should('be.visible'), by uniknąć testu przechodzącego, gdy element nie jest w ogóle wyrenderowany
+        this.successMessage.should('be.visible').and('contain.text', message);
     }
 
-    // Assercja komunikatu błędu logowania
     assertErrorMessage(expectedMessage) {
         this.errorMessage.should('be.visible').and('contain.text', expectedMessage);
     }

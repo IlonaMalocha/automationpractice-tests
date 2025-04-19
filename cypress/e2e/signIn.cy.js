@@ -5,7 +5,7 @@ import SignInPage from "../support/page_objects/SignInPage.js";
 
 describe('User Login', () => {
 
-    beforeEach(function() { // Pobranie danych w jsonie i przejście na stronę logowania
+    beforeEach(function() {
         cy.fixture('loginData').then((data) => {
             this.loginData = data;
         });
@@ -16,9 +16,9 @@ describe('User Login', () => {
         Home.signIn.click();
     });
 
-    afterEach(() => { //zamiast signOut po każdym przypadku - To sprawdza, czy przycisk Sign out w ogóle istnieje i tylko wtedy go klika — żeby test się nie wywalił, jeśli użytkownik wcale nie był zalogowany.
+    afterEach(() => {
         cy.get('body').then(($body) => {
-            if ($body.find('.logout').length > 0) { // lub inny selektor do przycisku wyloguj
+            if ($body.find('.logout').length > 0) {
                 cy.get('.logout').click();
             }
         });
@@ -27,10 +27,8 @@ describe('User Login', () => {
     });
 
     describe('Positive test cases', () => {
-
       it('Should log in with valid credentials from registration', function(){
-        // Wczytanie e-maila i hasła z pliku `tempLoginData.json`
-        const { email, password } = this.tempLoginData; //W Cypressie zawsze gdy używasz this.something, upewnij się, że otaczająca funkcja to function () {}, a nie () => {}.
+        const { email, password } = this.tempLoginData;
             SignInPage.enterEmail(email);
             SignInPage.enterPassword(password);
             SignInPage.submitLogin();
@@ -39,13 +37,12 @@ describe('User Login', () => {
     });
 
     describe('Negative test cases', () => {
-
         it('Should show an error with an invalid email format', function() {
             const invalidData = this.loginData.find(test => test.scenario === 'Invalid email format');
             SignInPage.enterEmail(invalidData.email);
             SignInPage.enterPassword(invalidData.password);
             SignInPage.submitLogin();
-            SignInPage.assertErrorMessage(invalidData.message); // Sprawdzenie komunikatu błędu
+            SignInPage.assertErrorMessage(invalidData.message);
         });
 
         it('Should show an error when email is missing', function() {

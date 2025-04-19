@@ -1,28 +1,27 @@
 class RegistrationPage {
 
     fillEmail(email) {
-        cy.get('#email_create').should('be.visible').type(email); //metoda wpisująca email
+        cy.get('#email_create').should('be.visible').type(email);
     }
 
     submitEmail() {
-        cy.get('#SubmitCreate').click(); //metoda klikająca zatwierdzenie emaila
+        cy.get('#SubmitCreate').click();
     }
 
-    // Kombinacja obu powyższych
     enterEmail(email) {
         this.fillEmail(email);
         this.submitEmail();
     }
 
-    clickOnCreateAnAccount(){ //kliknięcie przycisku Create an account
+    clickOnCreateAnAccount(){
         cy.get('#SubmitCreate').click();
     }
 
     fillPersonalInformation({ title, firstName, lastName, password, dob, newsletter }) {
-        if (title === 'Mr') cy.get('#id_gender1').check(); // Jeśli tytuł to "Mr", zaznacz radio button "Mr"
-        else if (title === 'Mrs') cy.get('#id_gender2').check();  // Jeśli tytuł to "Mrs", zaznacz radio button "Mrs"
+        if (title === 'Mr') cy.get('#id_gender1').check();
+        else if (title === 'Mrs') cy.get('#id_gender2').check();
     
-        if (firstName) cy.get('#customer_firstname').type(firstName); // Jeśli podano imię, wpisz je do pola "First name"
+        if (firstName) cy.get('#customer_firstname').type(firstName);
         if (lastName) cy.get('#customer_lastname').type(lastName);
         if (password) cy.get('#passwd').type(password);
     
@@ -36,14 +35,14 @@ class RegistrationPage {
     }
 
     submitRegistration(){
-        cy.get('#submitAccount').click(); // Zatwierdzenie rejestracji
+        cy.get('#submitAccount').click();
     }
 
-    assertSuccessMessage(expectedMessage) {
+    assertSuccessMessage(expectedMessage){
         cy.get('.alert.alert-success').should('contain', expectedMessage);
     }
 
-    assertErrorMessage(expectedMessage) {
+    assertErrorMessage(expectedMessage){
         cy.get('.alert.alert-danger').should('contain', expectedMessage);
     }
 }
