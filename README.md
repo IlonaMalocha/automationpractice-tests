@@ -41,8 +41,8 @@ To run the tests locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/cypress-e2e-portfolio.git
-   cd cypress-e2e-portfolio
+   git clone https://github.com/IlonaMalocha/automationpractice-tests.git
+   cd automationpractice-tests
    ```
 
 2. **Install dependencies:**
