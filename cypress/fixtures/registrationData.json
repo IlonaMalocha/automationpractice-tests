@@ -1,0 +1,126 @@
+[
+    {
+        "scenario": "Valid email, all fields completed",
+        "title": "Mr",
+        "firstName": "John",
+        "lastName": "Doe",
+        "password": "Password123",
+        "dob": {
+            "day": "10",
+            "month": "10",
+            "year": "1990"
+        },
+        "newsletter": true,
+        "message": "Your account has been created."
+    },
+    {
+        "scenario": "Valid email, mandatory fields completed",
+        "title": "",
+        "firstName": "Keira",
+        "lastName": "Black",
+        "password": "Password123",
+        "dob": {},
+        "newsletter": false,
+        "message": "Your account has been created."
+    },
+    {
+        "scenario": "Invalid email format",
+        "email": "invalid_email",
+        "message": "Invalid email address."
+    },
+    {
+        "scenario": "Invalid email format",
+        "email": "i234234234",
+        "message": "Invalid email address."
+    },
+    {
+        "scenario": "Empty first name",
+        "email": "test3435_email@gmail.com",
+        "title": "Mrs",
+        "firstName": "",
+        "lastName": "Doe",
+        "password": "Password123",
+        "dob": {
+            "day": "22",
+            "month": "4",
+            "year": "1992"
+        },
+        "newsletter": true,
+        "message": "firstname is required."
+    },
+    {
+        "scenario": "Empty last name",
+        "email": "test5635_email@gmail.com",
+        "title": "Mrs",
+        "firstName": "Jane",
+        "lastName": "",
+        "password": "Password123",
+        "dob": {
+            "day": "30",
+            "month": "12",
+            "year": "1988"
+        },
+        "newsletter": false,
+        "message": "lastname is required."
+    },
+    {
+        "scenario": "Password too short",
+        "email": "test3900_email@gmail.com",
+        "title": "Mr",
+        "firstName": "Mark",
+        "lastName": "Smith",
+        "password": "Pas1",
+        "dob": {
+            "day": "5",
+            "month": "6",
+            "year": "1975"
+        },
+        "newsletter": false,
+        "message": "passwd is invalid."
+    },
+    {
+        "scenario": "Missing password",
+        "email": "test1435_email@gmail.com",
+        "title": "Mrs",
+        "firstName": "Emily",
+        "lastName": "Brown",
+        "password": "",
+        "dob": {
+            "day": "18",
+            "month": "11",
+            "year": "1995"
+        },
+        "newsletter": true,
+        "message": "passwd is required."
+    },
+    {
+        "scenario": "DOB day out of range",
+        "email": "test4444_email@gmail.com",
+        "title": "Mrs",
+        "firstName": "Sara",
+        "lastName": "Taylor",
+        "password": "Password123",
+        "dob": {
+            "day": "31",
+            "month": "2",
+            "year": "1980"
+        },
+        "newsletter": true,
+        "message": "Invalid date of birth."
+    },
+    {
+        "scenario": "DOB later that today",
+        "email": "test312125_email@gmail.com",
+        "title": "Mrs",
+        "firstName": "Alice",
+        "lastName": "Williams",
+        "password": "Password123",
+        "dob": {
+            "day": "29",
+            "month": "11",
+            "year": "2025"
+        },
+        "newsletter": true,
+        "message": "Invalid date of birth."
+    }
+]

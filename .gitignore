@@ -1,0 +1,28 @@
+# Ignorowanie folderu z raportami wyników
+cypress/reports/
+
+# Ignorowanie logów
+cypress/logs/
+
+# Ignorowanie zrzutów ekranu i wideo z testów (jeśli nie chcesz ich wrzucać)
+cypress/screenshots/
+cypress/videos/
+
+# Ignorowanie node_modules
+node_modules/
+
+# Ignorowanie systemowych śmieci (macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# Ignorowanie plików środowiskowych (jeśli kiedyś użyjesz .env)
+.env
+
+# Ignorowanie plików logów
+*.log
+
+# Ignorowanie plików tymczasowych lub kopii zapasowych
+*~ 
+*.swp
+*.bak
+*.tmp

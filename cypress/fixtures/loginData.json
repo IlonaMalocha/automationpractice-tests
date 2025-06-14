@@ -1,0 +1,32 @@
+[
+    {
+        "scenario": "Valid credentials",
+        "email": "user@test.com",
+        "password": "correct_password",
+        "message": "Welcome to your account dashboard"
+    },
+    {
+        "scenario": "Invalid email format",
+        "email": "invalid_email_format",
+        "password": "any_password",
+        "message": "Invalid email address."
+    },
+    {
+        "scenario": "Missing email",
+        "email": "",
+        "password": "any_password",
+        "message": "An email address required."
+    },
+    {
+        "scenario": "Missing password",
+        "email": "user@test.com",
+        "password": "",
+        "message": "Password is required."
+    },
+    {
+        "scenario": "Incorrect email or password",
+        "email": "user@test.com",
+        "password": "wrong_password",
+        "message": "Authentication failed."
+    }
+]
