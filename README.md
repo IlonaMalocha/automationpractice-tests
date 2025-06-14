@@ -14,6 +14,7 @@ It includes selected test cases that demonstrate key functionalities and typical
 
 ## Project structure
 
+```
 cypress/
 │
 ├── e2e/                      # End-to-End test files
@@ -28,6 +29,7 @@ package.json                  # Project dependencies and scripts
 package-lock.json             # Auto-generated file locking dependency versions
 .gitignore                    # Specifies files/folders ignored by Git
 README.md                     # Project documentation and description
+```
 
 ## Technologies used
 
